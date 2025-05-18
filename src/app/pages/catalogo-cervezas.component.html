@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <h2 class="mb-4">Catálogo de cervezas</h2>
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Nombre</th>
+        <th>Estilo</th>
+        <th>Graduación</th>
+        <th>País</th>
+        <th>Precio (€)</th>
+        <th>Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cerveza of cervezas">
+        <td>{{ cerveza.nombre }}</td>
+        <td>{{ cerveza.estilo }}</td>
+        <td>{{ cerveza.graduacion }}º</td>
+        <td>{{ cerveza.paisOrigen }}</td>
+        <td>{{ cerveza.precio }}</td>
+        <td>{{ cerveza.stock }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
