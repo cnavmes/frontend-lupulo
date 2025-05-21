@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -22,11 +23,23 @@ export class LoginComponent {
     this.authService.login(this.email, this.password).subscribe({
       next: (res) => {
         this.authService.guardarToken(res.token);
-        this.router.navigate(['/']);
+
+        const payload: any = jwtDecode(res.token);
+        const rol = payload.rol;
+
+        if (rol === 'ADMIN') {
+          this.router.navigate(['/admin-panel']);
+        } else {
+          this.router.navigate(['/usuario-panel']);
+        }
       },
       error: () => {
         this.error = 'Credenciales incorrectas';
       }
     });
+  }
+
+  continuarSinLogin(): void {
+    this.router.navigate(['/catalogo']);
   }
 }

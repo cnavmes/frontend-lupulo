@@ -1,0 +1,123 @@
+<div class="flex h-screen surface-ground">
+  <!-- Sidebar -->
+  <aside class="w-64 surface-100 p-4 flex flex-col justify-between shadow-2">
+    <div>
+      <h2 class="text-xl font-bold text-primary mb-5 flex items-center gap-2">
+        <i class="pi pi-compass"></i> Prime
+      </h2>
+      <ul class="list-none p-0 text-white text-sm">
+        <li class="mb-3">
+          <a class="flex items-center gap-2 p-2 bg-primary border-round text-white">
+            <i class="pi pi-home"></i> Overview
+          </a>
+        </li>
+        <li class="mb-2">
+          <a class="flex items-center gap-2 p-2 hover:bg-surface-200 border-round transition-colors cursor-pointer">
+            <i class="pi pi-comments"></i> Chat
+          </a>
+        </li>
+        <li class="mb-2">
+          <a class="flex items-center gap-2 p-2 hover:bg-surface-200 border-round transition-colors cursor-pointer">
+            <i class="pi pi-inbox"></i> Inbox
+          </a>
+        </li>
+        <li class="mb-2">
+          <a class="flex items-center gap-2 p-2 hover:bg-surface-200 border-round transition-colors cursor-pointer">
+            <i class="pi pi-credit-card"></i> Cards
+          </a>
+        </li>
+        <li>
+          <a class="flex items-center gap-2 p-2 hover:bg-surface-200 border-round transition-colors cursor-pointer">
+            <i class="pi pi-users"></i> Customers
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- User info -->
+    <div class="flex items-center gap-2 mt-4">
+      <p-avatar label="RJ" shape="circle"></p-avatar>
+      <div class="text-sm text-white">
+        <div class="font-medium">Robin Jonas</div>
+        <div class="text-xs">hi&#64;robin.xyz</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 flex flex-col overflow-hidden">
+    <!-- Topbar -->
+    <header class="flex justify-between items-center px-6 py-4 surface-0 shadow-1">
+      <div>
+        <h1 class="text-2xl font-semibold text-white mb-1">Good Morning, Robin 👋</h1>
+        <p class="text-sm text-400">Overview</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button pButton icon="pi pi-download" label="Download" class="p-button-sm p-button-outlined"></button>
+        <input type="date" class="p-inputtext text-sm border-round px-2 py-1" />
+      </div>
+    </header>
+
+    <!-- Content -->
+    <section class="p-6 overflow-auto flex-1 surface-ground">
+      <!-- Chart -->
+      <p-card header="Crypto Analytics" class="mb-5">
+        <div style="height: 300px;">
+          <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
+        </div>
+      </p-card>
+
+      <!-- Grid -->
+      <div class="grid gap-4">
+        <!-- Transactions -->
+        <div class="col-12 lg:col-8">
+          <p-card header="Transactions">
+            <p-table [value]="transactions" responsiveLayout="scroll">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Coin</th>
+                  <th>Date</th>
+                  <th>Process</th>
+                  <th>Amount</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-row>
+                <tr>
+                  <td>#{{ row.id }}</td>
+                  <td>
+                    <div class="flex items-center gap-2">
+                      <p-avatar label="{{ row.initials }}" shape="circle"></p-avatar>
+                      {{ row.name }}
+                    </div>
+                  </td>
+                  <td>{{ row.coin }}</td>
+                  <td>{{ row.date }}</td>
+                  <td>
+                    <p-tag [value]="row.type" [severity]="row.type === 'Buy' ? 'success' : 'danger'"></p-tag>
+                  </td>
+                  <td>{{ row.amount }}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </p-card>
+        </div>
+
+        <!-- Wallet -->
+        <div class="col-12 lg:col-4">
+          <p-card header="My Wallet">
+            <ul class="list-none m-0 p-0 text-sm text-white">
+              <li class="flex justify-between mb-2"><span>BTC (%15)</span><span>27.215</span></li>
+              <li class="flex justify-between mb-2"><span>ETH (%5)</span><span>4.367</span></li>
+              <li class="flex justify-between mb-2"><span>EUR (%25)</span><span>€ 147.562,32</span></li>
+              <li class="flex justify-between mb-2"><span>USD (%29)</span><span>$ 133.364,12</span></li>
+              <li class="flex justify-between mb-2"><span>XAU (%29)</span><span>200 g</span></li>
+            </ul>
+            <button pButton label="Show all" class="p-button-text mt-3 w-full"></button>
+          </p-card>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
